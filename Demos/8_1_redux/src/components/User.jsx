@@ -2,7 +2,7 @@ import React from 'react';
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import {deleteUser} from '../actions/actionCreator';
+import {deleteUser} from '../actions/userActionCreator';
 
 const deleteUserHandler=(props, e)=>{
   e.preventDefault();

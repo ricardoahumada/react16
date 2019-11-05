@@ -3,7 +3,8 @@ import { Switch, Route } from 'react-router-dom';
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import * as actionCreator from '../actions/actionCreator';
+import * as userActionCreator from '../actions/userActionCreator';
+import * as empresaActionCreator from '../actions/empresaActionCreator';
 
 
 import Navigation from './Navigation';
@@ -15,15 +16,6 @@ const UserForm = lazy(() => import('./UserForm'));
 
 class Main extends Component {
 
-	handleUserSubmit = (user) => {
-		var users = this.state.data;
-		user.id = Date.now();
-		var newUsers = users.concat([user]);
-		this.setState({ data: newUsers });
-
-		console.log(user, newUsers);
-	}
-
 	render() {
 		return (
 			<div className="container">
@@ -33,7 +25,7 @@ class Main extends Component {
 					<Route exact path='/' component={() => <UserBox data={this.props.users} />}></Route>
 					<Route exact path='/new' render={() =>
 						<Suspense fallback="Loading...">
-							<UserForm onUserSubmit={this.handleUserSubmit} {...this.props} />
+							<UserForm {...this.props} />
 						</Suspense>
 					}></Route>
 					<Route exact path='/comps' component={() => <EmpresaBox data={this.props.empresas} deleteEmpresa={this.props.deleteEmpresa}/>}></Route>
@@ -44,7 +36,7 @@ class Main extends Component {
 }
 
 function mapStateToProps(state) {
-	console.log('mapStateToProps...',state);
+	// console.log('mapStateToProps...',state);
 	return {
 		users: state.users,
 		empresas: state.empresas
@@ -52,8 +44,8 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-	console.log('mapDispatchToProps...');
-	return bindActionCreators(actionCreator, dispatch);
+	// console.log('mapDispatchToProps...');
+	return bindActionCreators({...userActionCreator,...empresaActionCreator}, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Main);
