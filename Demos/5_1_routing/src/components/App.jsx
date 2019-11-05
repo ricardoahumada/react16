@@ -15,7 +15,7 @@ const data = [
 
 const UserForm = lazy(() => import('./UserForm'));
 
-class Main extends Component {
+class App extends Component {
 	state = { data: data };
 
 	handleUserSubmit = (user) => {
@@ -45,4 +45,4 @@ class Main extends Component {
 	}
 }
 
-export default Main;
+export default App;

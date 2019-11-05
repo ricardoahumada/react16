@@ -7,7 +7,7 @@ import UserBox from './UserBox';
 
 const UserForm = lazy(() => import('./UserForm'));
 
-class Main extends Component {
+class App extends Component {
 	state = { data: [] };
 
 	loadUsersFromServer = () => {
@@ -55,4 +55,4 @@ class Main extends Component {
 	}
 }
 
-export default Main;
+export default App;
