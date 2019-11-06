@@ -31,7 +31,7 @@ const UserForm = (props) => {
   }
 
   useEffect(() => {
-    console.log("Effect:", name, email, errors, redirect);
+    console.log("useffect!!");
   })
 
   return (
