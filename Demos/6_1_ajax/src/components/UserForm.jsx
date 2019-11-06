@@ -34,7 +34,7 @@ class UserForm extends Component {
 
     console.log(name, email);
 
-    fetch('api-mock/users.json', {
+    fetch('http://localhost:8080/users', {
       method: 'POST',
       body: JSON.stringify({ name: name, email: email }),
       headers: {'Content-Type': 'application/json'}

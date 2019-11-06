@@ -11,11 +11,11 @@ class App extends Component {
 	state = { data: [] };
 
 	loadUsersFromServer = () => {
-		fetch('api-mock/users.json', { method: 'get' })
+		fetch('http://localhost:8080/users', { method: 'get' })
 			.then(response => response.json())
 			.then(json => {
-				console.log("JSON:", json.data);
-				this.setState({ data: json.data });
+				console.log("JSON:", json);
+				this.setState({ data: json });
 
 			})
 			.catch(function (err) {
@@ -33,7 +33,7 @@ class App extends Component {
 		console.log(user, newUsers);
 	}
 
-	componentDidMount(){
+	componentDidMount() {
 		this.loadUsersFromServer();
 	}
 

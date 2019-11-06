@@ -17,7 +17,7 @@ const UserForm = lazy(() => import('./UserForm'));
 class Main extends Component {
 	componentDidMount(){
 		console.log('Main:',this.props);
-		this.props.fetchUsers('/api-mock/users.json');
+		this.props.fetchUsers('http://localhost:8080/users');
 	}
 
 	showSpinner=()=>{

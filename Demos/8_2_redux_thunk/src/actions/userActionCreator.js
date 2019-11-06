@@ -28,7 +28,7 @@ function receiveUsers(url, json) {
 	return {
 		type: 'RECEIVED_USERS',
 		url,
-		users: json.data,
+		users: json,
 		receivedAt: Date.now()
 	}
 }
