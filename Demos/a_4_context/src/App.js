@@ -4,7 +4,7 @@ import ThemeContext from './ThemeContext';
 
 const App = () => (
   <div>
-    <PrimaryHeadline>Hello React Context</PrimaryHeadline>
+    <PrimaryHeadline>Hello React Context!!</PrimaryHeadline>
 
     <Paragraph>
       That's how you use children in React by the way.
@@ -21,7 +21,7 @@ const App = () => (
 
 const PrimaryHeadline = ({ children }) => (
   <ThemeContext.Consumer>
-    {value => <h1 style={{ color: value }}>{children}</h1>}
+    {(value) => <h1 style={value}>{children}</h1>}
   </ThemeContext.Consumer>
 );
 

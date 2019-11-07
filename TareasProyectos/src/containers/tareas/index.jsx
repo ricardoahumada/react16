@@ -10,10 +10,10 @@ import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 
 const tareas = [
-    new Tarea(1, 'Tarea 1', 'la tarea 1', 5, 1),
-    new Tarea(2, 'Tarea 2', 'la tarea 2', 7, 1),
-    new Tarea(3, 'Tarea 3', 'la tarea 3', 4, 2),
-    new Tarea(4, 'Tarea 4', 'la tarea 4', 6, 2),
+    new Tarea(1, 'Tarea 1', 5, 1),
+    new Tarea(2, 'Tarea 2', 7, 1),
+    new Tarea(3, 'Tarea 3', 4, 2),
+    new Tarea(4, 'Tarea 4', 6, 2),
 ];
 
 class TareasContainer extends React.Component {
