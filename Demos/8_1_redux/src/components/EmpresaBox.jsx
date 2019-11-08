@@ -12,6 +12,8 @@ class EmpresaBox extends Component {
   }
 
   render() {
+    console.log('empresabox:', this.props);
+    
     const listaEmpresas = this.props.data.map(aE => <li key={aE.id} className="list-group-item">
       <div className="d-flex w-100 justify-content-between">
         <p>{aE.name}</p>

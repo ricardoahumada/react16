@@ -17,6 +17,8 @@ const UserForm = lazy(() => import('./UserForm'));
 class Main extends Component {
 
 	render() {
+		console.log('Main:', this.props);
+		
 		return (
 			<div className="container">
 				<h1>Usuarios</h1>
@@ -28,7 +30,7 @@ class Main extends Component {
 							<UserForm {...this.props} />
 						</Suspense>
 					}></Route>
-					<Route exact path='/comps' component={() => <EmpresaBox data={this.props.empresas} deleteEmpresa={this.props.deleteEmpresa}/>}></Route>
+					<Route exact path='/comps' component={(props) => <EmpresaBox {...props} data={this.props.empresas} deleteEmpresa={this.props.deleteEmpresa}/>}></Route>
 				</Switch>
 			</div>
 		)
