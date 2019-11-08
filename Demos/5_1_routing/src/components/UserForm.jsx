@@ -17,7 +17,8 @@ class UserForm extends Component {
   }
 
   handleNameChange = (e) => {
-    this.setState({ name: e.target.value });
+    const name = e.target.value;
+    if(!name.match(/[0-9]/g)) this.setState({ name: e.target.value });
   }
 
   handleEmailChange = (e) => {
@@ -40,7 +41,8 @@ class UserForm extends Component {
   }
 
   render() {
-
+    console.log('UserBox:',this.props);
+    
 
     return (
       <form className="userForm" onSubmit={this.handleSubmit}>
