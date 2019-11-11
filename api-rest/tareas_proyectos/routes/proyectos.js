@@ -2,8 +2,8 @@ const express = require('express');
 const router = express.Router();
 
 const data = [
-  {id:1, nombre:'Proyecyo 1'},
-  {id:2, nombre:'Proyecyo 2'},
+  {id:1, nombre:'Proyecto 1'},
+  {id:2, nombre:'Proyecto 2'},
 ];
 
 router.get('/', function (req, res) {
