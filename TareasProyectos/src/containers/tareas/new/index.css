@@ -1,0 +1,16 @@
+.tareaForm>div {
+    margin: 1em auto;
+}
+
+.myslider {
+    max-width: 50%;
+    padding: 0 1em;
+    margin: auto;
+    background: rgba(0, 0, 0, 0.09);
+    border-radius: 5px 5px 0 0;
+}
+
+.myslider p {
+    color: rgba(0, 0, 0, 0.54);
+    font-size: 0.75em;
+}

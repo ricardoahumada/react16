@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
@@ -8,8 +8,8 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 
 const Navigation = () => (
     <BottomNavigation>
-        <NavLink to='/tareas'><BottomNavigationAction showLabel={true} label="Tareas" icon={<RestoreIcon />} /></NavLink>
-        <NavLink to='/proyectos'><BottomNavigationAction showLabel={true} label="Proyectos" icon={<FavoriteIcon />} /></NavLink>
+        <BottomNavigationAction component={Link} to='/tareas' label="Tareas" icon={<RestoreIcon />} />
+        <BottomNavigationAction component={Link} to='/proyectos'showLabel={true} label="Proyectos" icon={<FavoriteIcon />} />
     </BottomNavigation>    
 );
 
