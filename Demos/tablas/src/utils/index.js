@@ -1,0 +1,1 @@
+export const getArray = (max) => [...Array(max).keys()];
