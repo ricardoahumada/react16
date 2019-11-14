@@ -44,8 +44,7 @@ export function fetchUsers(url) {
 			.then(json => {
 				console.log('fetched:', json);
 				dispatch(receiveUsers(url, json))
-			}
-			);
+			});
 	}
 
 }
