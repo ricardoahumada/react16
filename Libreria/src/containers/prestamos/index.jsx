@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 
 import PrestamoComp from './component/PrestamoComp'
 import NewPrestamo from './new'
@@ -9,9 +9,14 @@ import Typography from '@material-ui/core/Typography';
 
 const style = {
     backgroundColor: 'yellow',
-    borderRadius:'5px',
+    borderRadius: '5px',
     padding: '5px'
 };
+
+const MAX = 4;
+
+
+/* 
 
 class PrestamosBox extends React.Component {
 
@@ -28,27 +33,29 @@ class PrestamosBox extends React.Component {
         this.props.prestado(prestamo.libro);
     }
 
-    devolverHandler=(idLibro)=>{
-        console.log('devolverHandler:',idLibro);
-        const prestamos = this.state.prestamos.filter(aL=>aL.libro!==idLibro);
+    devolverHandler = (idLibro) => {
+        console.log('devolverHandler:', idLibro);
+        const prestamos = this.state.prestamos.filter(aL => aL.libro !== idLibro);
         this.setState({ prestamos });
-        this.props.devuelto(idLibro);        
+        this.props.devuelto(idLibro);
     }
-    
+
 
     render() {
         const prestamo = this.props.prestamo;
         const usuario = this.props.usuario;
-        const prestamos = this.state.prestamos.map(aP => <PrestamoComp key={aP.id} prestamo={aP} devolver={this.devolverHandler}/>)
+        const prestamos = this.state.prestamos.map(aP => <PrestamoComp key={aP.id} prestamo={aP} devolver={this.devolverHandler} />)
         const num = this.state.prestamos.length;
 
         return (
             <section>
                 <Typography variant="h3">Prestamos</Typography>
-                {num >= 4 ? <Typography variant="h5" style={style}>Máximo de préstamos alcanzado!!</Typography> : null}
+                {num >= MAX ? <Typography variant="h5" style={style}>Máximo de préstamos alcanzado!!</Typography> : null}
                 <Paper>
                     <List>
                         {prestamos}
+                        {num === 0 ? <Typography variant="h5" style={style}>Sin prestamos</Typography> : null}
+
                     </List>
                 </Paper>
 
@@ -58,6 +65,52 @@ class PrestamosBox extends React.Component {
             </section >
         )
     }
+}
+
+export default PrestamosBox;
+
+ */
+const PrestamosBox = ({ prestamo, usuario, prestado, devuelto }) => {
+    const [num, setNum] = useState(0);
+    const [prestamos, setPrestamos] = useState([]);
+
+    const prestarHandler = (prestamo) => {
+        prestamo.id = new Date().getTime();
+        prestamos.push(prestamo);
+        setPrestamos(prestamos);
+        prestado(prestamo.libro);
+    }
+
+    const devolverHandler = (idLibro) => {
+        setPrestamos(prestamos.filter(aP => aP.libro !== idLibro));
+        devuelto(idLibro);
+    }
+
+    useEffect(() => {
+        setNum(prestamos.length);
+    }, [prestamos.length]);
+
+    const showNew = !prestamo || num>=MAX ? null : (
+        <Paper>
+            <NewPrestamo libro={prestamo} usuario={usuario} prestarH={prestarHandler} />
+        </Paper>
+    );
+
+    return (
+        <section>
+            <Typography variant="h3">Prestamos</Typography>
+            {num >= MAX ? <Typography variant="h5" style={style}>Máximo de préstamos alcanzado!!</Typography> : null}
+            <Paper>
+                <List>
+                    {prestamos.map(aP => <PrestamoComp key={aP.id} prestamo={aP} devolver={devolverHandler} />)}
+                    {num ===0 ? <Typography variant="h5" style={style}>Sin prestamos</Typography> : null}
+
+                </List>
+            </Paper>
+
+            {showNew}
+        </section >
+    );
 }
 
 export default PrestamosBox;
