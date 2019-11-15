@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 
+import { Switch, Route, Redirect } from 'react-router-dom';
+
 import PrestamoComp from './component/PrestamoComp'
 import NewPrestamo from './new'
 
@@ -90,7 +92,7 @@ const PrestamosBox = ({ prestamo, usuario, prestado, devuelto }) => {
         setNum(prestamos.length);
     }, [prestamos.length]);
 
-    const showNew = !prestamo || num>=MAX ? null : (
+    const showNew = !prestamo || num >= MAX ? null : (
         <Paper>
             <NewPrestamo libro={prestamo} usuario={usuario} prestarH={prestarHandler} />
         </Paper>
@@ -98,17 +100,24 @@ const PrestamosBox = ({ prestamo, usuario, prestado, devuelto }) => {
 
     return (
         <section>
-            <Typography variant="h3">Prestamos</Typography>
-            {num >= MAX ? <Typography variant="h5" style={style}>Máximo de préstamos alcanzado!!</Typography> : null}
-            <Paper>
-                <List>
-                    {prestamos.map(aP => <PrestamoComp key={aP.id} prestamo={aP} devolver={devolverHandler} />)}
-                    {num ===0 ? <Typography variant="h5" style={style}>Sin prestamos</Typography> : null}
+            <Switch>
+                <Route exact path="/prestamos">
 
-                </List>
-            </Paper>
+                    <Typography variant="h3">Prestamos</Typography>
+                    {num >= MAX ? <Typography variant="h5" style={style}>Máximo de préstamos alcanzado!!</Typography> : null}
+                    <Paper>
+                        <List>
+                            {prestamos.map(aP => <PrestamoComp key={aP.id} prestamo={aP} devolver={devolverHandler} />)}
+                            {num === 0 ? <Typography variant="h5" style={style}>Sin prestamos</Typography> : null}
 
-            {showNew}
+                        </List>
+                    </Paper>
+                </Route>
+
+                <Route exact path="/prestamos/nuevo">
+                    {showNew}
+                </Route>
+            </Switch>
         </section >
     );
 }

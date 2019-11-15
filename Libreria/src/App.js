@@ -8,6 +8,9 @@ import PrestamosBox from './containers/prestamos'
 
 import { libros } from './data/libros'
 import Usuario from './models/usuario';
+import Navigation from './Navigation';
+
+import { Switch, Route, Redirect } from 'react-router-dom';
 
 class App extends React.Component {
   state = { libros: [], prestamo: null, usuario: null }
@@ -38,13 +41,21 @@ class App extends React.Component {
 
     return (
       <Container maxWidth="sm">
-        <LibrosBox libros={libros} prestar={this.prestarHandler} />
-        <PrestamosBox
-          prestamo={this.state.prestamo}
-          usuario={this.state.usuario}
-          prestado={this.prestadoHandler}
-          devuelto={this.devueltoHandler}
-        />
+        {this.state.prestamo?<Redirect to="/prestamos/nuevo" />:null}
+        <Navigation />
+
+        <Switch>
+          <Route exact path="/"><Redirect to="/libros" /></Route>
+          <Route exact path="/libros" render={() => <LibrosBox libros={libros} prestar={this.prestarHandler} />} />
+          <Route path="/prestamos" render={() =>
+            <PrestamosBox
+              prestamo={this.state.prestamo}
+              usuario={this.state.usuario}
+              prestado={this.prestadoHandler}
+              devuelto={this.devueltoHandler}
+            />
+          } />
+        </Switch>
       </Container>
     );
   }

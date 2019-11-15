@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 
 import { Divider, TextField, Typography, Button } from '@material-ui/core';
 
@@ -47,6 +48,7 @@ class NewPrestamo extends React.Component {
         e.preventDefault();
         const prestamo = this.state;         
         this.props.prestarH(prestamo);
+        this.props.history.push('/prestamos')
     }
 
     render() {
@@ -91,4 +93,4 @@ class NewPrestamo extends React.Component {
 
 }
 
-export default NewPrestamo;
+export default withRouter(NewPrestamo);
