@@ -46,9 +46,20 @@ class NewPrestamo extends React.Component {
 
     prestaLibro = (e) => {
         e.preventDefault();
-        const prestamo = this.state;         
-        this.props.prestarH(prestamo);
-        this.props.history.push('/prestamos')
+        const prestamo = this.state;
+        /* this.props.prestarH(prestamo);
+        this.props.history.push('/prestamos') */
+
+        fetch('http://localhost:8080/prestamos', {
+            method: 'POST',
+            body: JSON.stringify(prestamo),
+            headers: { 'Content-type': 'application/json' }
+        }).
+            then(response => response.json()).
+            then(prestamo => {
+                this.props.prestarH(prestamo);
+                this.props.history.push('/prestamos');
+            });
     }
 
     render() {

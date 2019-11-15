@@ -1,22 +1,34 @@
 import React from 'react';
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
 import Container from '@material-ui/core/Container';
+
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 
 import LibrosBox from './containers/libros'
 import PrestamosBox from './containers/prestamos'
 
-import { libros } from './data/libros'
+// import { libros } from './data/libros'
 import Usuario from './models/usuario';
 import Navigation from './Navigation';
 
 import { Switch, Route, Redirect } from 'react-router-dom';
 
+import { fetchLibros } from './actions/librosActionCreator';
+
+
 class App extends React.Component {
   state = { libros: [], prestamo: null, usuario: null }
 
   componentDidMount() {
-    this.setState({ libros, usuario: new Usuario(1, 'Ricardo', 'r@r.com', null) });
+    /* fetch('http://localhost:8080/libros',{method:'GET'}).
+    then(response=>response.json()).
+    then(libros=>{
+      this.setState({ libros, usuario: new Usuario(1, 'Ricardo', 'r@r.com', null) });
+    }); */
+    this.props.fetchLibros();
+    
   }
 
   prestarHandler = (id) => {
@@ -38,6 +50,9 @@ class App extends React.Component {
   }
 
   render() {
+
+    // const libros = this.state.libros;
+    const libros = this.props.libros;
 
     return (
       <Container maxWidth="sm">
@@ -61,4 +76,17 @@ class App extends React.Component {
   }
 }
 
-export default App;
+const mapStateToProps = (state) => ({
+  libros: state.libros.data,
+});
+
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators(
+    { fetchLibros},
+    dispatch
+  );
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
+
+// export default App;

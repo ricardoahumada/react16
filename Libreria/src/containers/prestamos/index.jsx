@@ -2,8 +2,13 @@ import React, { useState, useEffect, useMemo } from 'react';
 
 import { Switch, Route, Redirect } from 'react-router-dom';
 
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+
 import PrestamoComp from './component/PrestamoComp'
 import NewPrestamo from './new'
+
+import { fetchPrestamos } from '../../actions/prestamosActionCreator';
 
 import List from '@material-ui/core/List';
 import Paper from '@material-ui/core/Paper';
@@ -72,7 +77,7 @@ class PrestamosBox extends React.Component {
 export default PrestamosBox;
 
  */
-const PrestamosBox = ({ prestamo, usuario, prestado, devuelto }) => {
+const PrestamosBox = ({ prestamo, usuario, prestado, devuelto, fetchPrestamos, prestamos_api }) => {
     const [num, setNum] = useState(0);
     const [prestamos, setPrestamos] = useState([]);
 
@@ -92,11 +97,20 @@ const PrestamosBox = ({ prestamo, usuario, prestado, devuelto }) => {
         setNum(prestamos.length);
     }, [prestamos.length]);
 
+    useEffect(() => {
+        fetchPrestamos();
+    }, [fetchPrestamos]);
+    
+    useMemo(() => {
+        setPrestamos(prestamos_api);        
+    }, [prestamos_api]);
+
     const showNew = !prestamo || num >= MAX ? null : (
         <Paper>
             <NewPrestamo libro={prestamo} usuario={usuario} prestarH={prestarHandler} />
         </Paper>
     );
+
 
     return (
         <section>
@@ -122,4 +136,17 @@ const PrestamosBox = ({ prestamo, usuario, prestado, devuelto }) => {
     );
 }
 
-export default PrestamosBox;
+const mapStateToProps = (state) => ({
+    prestamos_api: state.prestamos.data,
+});
+
+const mapDispatchToProps = (dispatch) => {
+    return bindActionCreators(
+        { fetchPrestamos },
+        dispatch
+    );
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(PrestamosBox);
+
+// export default PrestamosBox;
