@@ -26,4 +26,4 @@
     {id: 25, titulo: "Handbook of Assessing Variants and Complications in Anxiety Disorders", autor: "Dean McKay, Eric A. Storch", isbn: "978-1-4614-6452-5"},
     {id: 26, titulo: "Handbook of Crisis Intervention and Developmental Disabilities", autor: "Derek D. Reed, Florence D. DiGennaro Reed, James K. Luiselli", isbn: "978-1-4614-6531-7"},
     {id: 27, titulo: "Handbook of Culturally Responsive School Mental Health", autor: "Caroline S. Clauss-Ehlers, Zewelanji N. Serpell, Mark D. Weist", isbn: "978-1-4614-4948-5"},
-]
+];
